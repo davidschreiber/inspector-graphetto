@@ -27,5 +27,6 @@ dependencies {
 }
 
 tasks.withType<Test> {
+    @Suppress("UnstableApiUsage")
     useJUnitPlatform()
 }
