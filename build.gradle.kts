@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.3.60"
+    // Using Kotlin 1.3.50 since version 1.3.60 is not full compatible with coroutines and generates build errors in our tests.
+    // Waiting for some version after 1.3.60 to see if it resolves the issue. Here's a related error with what happened during
+    // the builds (not exact though): https://youtrack.jetbrains.com/issue/KT-34527
+    kotlin("jvm") version "1.3.50"
 }
 
 group = "at.droiddave.grapher"
