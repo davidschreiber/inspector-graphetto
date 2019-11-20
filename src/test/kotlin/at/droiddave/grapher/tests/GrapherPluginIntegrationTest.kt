@@ -4,7 +4,7 @@ import at.droiddave.grapher.tests.utils.TestDirectoryListener
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
 
-class GrapherPluginTest : StringSpec() {
+class GrapherPluginIntegrationTest : StringSpec() {
     private val tempDir = TestDirectoryListener()
     override fun listeners() = listOf(tempDir)
 
