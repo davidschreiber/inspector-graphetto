@@ -5,6 +5,7 @@ plugins {
     // Waiting for some version after 1.3.60 to see if it resolves the issue. Here's a related error with what happened during
     // the builds (not exact though): https://youtrack.jetbrains.com/issue/KT-34527
     kotlin("jvm") version "1.3.50"
+    id("java-gradle-plugin")
 }
 
 group = "at.droiddave.grapher"
@@ -29,4 +30,13 @@ dependencies {
 tasks.withType<Test> {
     @Suppress("UnstableApiUsage")
     useJUnitPlatform()
+}
+
+gradlePlugin {
+    plugins {
+        create("grapher") {
+            id = "at.droiddave.grapher"
+            implementationClass = "at.droiddave.grapher.GrapherPlugin"
+        }
+    }
 }
