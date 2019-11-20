@@ -21,9 +21,11 @@ compileKotlin.kotlinOptions { jvmTarget = "1.8" }
 compileTestKotlin.kotlinOptions { jvmTarget = "1.8" }
 
 dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
-    implementation(kotlin("stdlib-jdk8"))
+    testImplementation(gradleTestKit())
 }
 
 tasks.withType<Test> {
