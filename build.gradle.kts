@@ -23,7 +23,6 @@ compileTestKotlin.kotlinOptions { jvmTarget = "1.8" }
 dependencies {
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
-    testImplementation("org.slf4j:slf4j-log4j12:1.7.28")
     implementation(kotlin("stdlib-jdk8"))
 }
 
