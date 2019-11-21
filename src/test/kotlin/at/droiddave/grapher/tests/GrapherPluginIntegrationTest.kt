@@ -1,6 +1,7 @@
 package at.droiddave.grapher.tests
 
 import at.droiddave.grapher.tests.utils.TestDirectoryListener
+import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
 
@@ -21,6 +22,43 @@ class GrapherPluginIntegrationTest : StringSpec() {
                 .withPluginClasspath()
                 .withProjectDir(tempDir.get())
                 .build()
+        }
+
+        "Logs default task" {
+            val projectDir = tempDir.get()
+            val buildFile = projectDir.resolve("build.gradle")
+            buildFile.writeText("""
+                plugins {
+                    id('at.droiddave.grapher')
+                }
+                
+                tasks.register('someTask') {
+                    dependsOn 'someOtherTask'
+                }
+                
+                tasks.register('someOtherTask') 
+            """.trimIndent())
+
+            GradleRunner.create()
+                .withPluginClasspath()
+                .withProjectDir(projectDir)
+                .withArguments("someTask")
+                .build()
+
+            val reportFile = projectDir.resolve("build/reports/taskGraph/graph.dot")
+            val reportContent = reportFile.readText()
+            reportContent shouldBe """
+                strict digraph G {
+                  1 [ label=":someOtherTask" ];
+                  2 [ label=":someTask" ];
+                  2 -> 1;
+                }
+                
+            """.trimIndent()
+        }
+
+        "Works if report file already exists" {
+
         }
     }
 

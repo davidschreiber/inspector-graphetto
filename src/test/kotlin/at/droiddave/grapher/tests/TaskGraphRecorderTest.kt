@@ -20,4 +20,15 @@ class TaskGraphRecorderTest : StringSpec({
         recorder.recordTask(taskInfo)
         recorder.executedTasks should containExactly(taskInfo)
     }
+
+    "Multiple recorded tasks are returned in order" {
+        val recorder = TaskGraphRecorder()
+        val task1 = mockk<TaskInfo>()
+        val task2 = mockk<TaskInfo>()
+        val task3 = mockk<TaskInfo>()
+        recorder.recordTask(task1)
+        recorder.recordTask(task2)
+        recorder.recordTask(task3)
+        recorder.executedTasks should containExactly(task1, task2, task3)
+    }
 })

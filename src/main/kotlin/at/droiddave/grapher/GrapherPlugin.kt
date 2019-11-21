@@ -2,18 +2,36 @@ package at.droiddave.grapher
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.execution.TaskExecutionListener
-import org.gradle.api.tasks.TaskState
+import org.gradle.api.plugins.PluginInstantiationException
+import org.jgrapht.graph.DefaultEdge
+import org.jgrapht.graph.DirectedAcyclicGraph
+import org.jgrapht.io.DOTExporter
+import org.jgrapht.io.IntegerComponentNameProvider
+import org.jgrapht.io.StringComponentNameProvider
 
 class GrapherPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.gradle.taskGraph.addTaskExecutionListener(object : TaskExecutionListener {
-            override fun beforeExecute(task: Task) {
+        val outputFile = target.buildDir.resolve("reports/taskGraph/graph.dot")
+        outputFile.apply {
+            if (!parentFile.exists() && !parentFile.mkdirs()) {
+                throw PluginInstantiationException("Error while creating output directory: ${parentFile.absolutePath}")
+            }
+        }
+        target.gradle.taskGraph.addTaskExecutionGraphListener {
+            val dag = DirectedAcyclicGraph<String, DefaultEdge>(DefaultEdge::class.java)
+            it.allTasks.forEach { task ->
+                dag.addVertex(task.path)
+                task.taskDependencies.getDependencies(task).forEach { dependency ->
+                    dag.addEdge(task.path, dependency.path)
+                }
             }
 
-            override fun afterExecute(task: Task, state: TaskState) {
-            }
-        })
+            val exporter = DOTExporter<String, DefaultEdge>(
+                IntegerComponentNameProvider<String>(),
+                StringComponentNameProvider<String>(),
+                null
+            )
+            exporter.exportGraph(dag, outputFile)
+        }
     }
 }

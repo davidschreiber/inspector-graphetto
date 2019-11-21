@@ -16,6 +16,6 @@ class TestDirectoryListener : TestListener {
     }
 
     override fun afterTest(testCase: TestCase, result: TestResult) {
-        testDirectory.delete()
+        testDirectory.deleteRecursively()
     }
 }
