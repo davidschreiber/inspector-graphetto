@@ -1,11 +1,11 @@
-package at.droiddave.grapher.tests
+package at.droiddave.grapher.tests.integration
 
 import at.droiddave.grapher.tests.utils.TestDirectoryListener
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
 
-class GrapherPluginIntegrationTest : StringSpec() {
+class BasicIntegrationTest : StringSpec() {
     private val tempDir = TestDirectoryListener()
     override fun listeners() = listOf(tempDir)
 

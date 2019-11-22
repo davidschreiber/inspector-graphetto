@@ -2,7 +2,6 @@ package at.droiddave.grapher
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.PluginInstantiationException
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.DirectedAcyclicGraph
 import org.jgrapht.io.DOTExporter
@@ -14,7 +13,7 @@ class GrapherPlugin : Plugin<Project> {
         val outputFile = target.buildDir.resolve("reports/taskGraph/graph.dot")
         outputFile.apply {
             if (!parentFile.exists() && !parentFile.mkdirs()) {
-                throw PluginInstantiationException("Error while creating output directory: ${parentFile.absolutePath}")
+                error("Error while creating output directory: ${parentFile.absolutePath}")
             }
         }
         target.gradle.taskGraph.addTaskExecutionGraphListener {
