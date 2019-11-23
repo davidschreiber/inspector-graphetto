@@ -35,8 +35,22 @@ class AndroidIntegrationTest : StringSpec() {
         }
 
         "Works if report file already exists" {
+            val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/android-agp-3.5.2")
+            projectDir.resolve("build/reports/taskGraph/graph.dot").apply {
+                parentFile.mkdirs()
+                writeText("some content")
+            }
 
+            GradleRunner.create()
+                .withPluginClasspath()
+                .withProjectDir(projectDir)
+                .withArguments("assembleDebug")
+                .build()
+
+            val reportFile = projectDir.resolve("build/reports/taskGraph/graph.dot")
+            val actualGraph = loadGraphFromFile(reportFile)
+            val expectedGraph = loadGraphFromTestResources("/results/android-agp-3.5.2.dot")
+            actualGraph shouldBeIsomorphTo expectedGraph
         }
     }
-
 }
