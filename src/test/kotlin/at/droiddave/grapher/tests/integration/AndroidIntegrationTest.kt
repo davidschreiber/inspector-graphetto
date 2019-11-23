@@ -1,15 +1,15 @@
 package at.droiddave.grapher.tests.integration
 
 import at.droiddave.grapher.tests.utils.TestDirectoryListener
+import at.droiddave.grapher.tests.utils.loadGraphFromFile
+import at.droiddave.grapher.tests.utils.loadGraphFromTestResources
+import at.droiddave.grapher.tests.utils.shouldBeIsomorphTo
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
 import org.jgrapht.alg.isomorphism.VF2GraphIsomorphismInspector
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.DirectedAcyclicGraph
-import org.jgrapht.io.DOTImporter
-import org.jgrapht.io.EdgeProvider
-import org.jgrapht.io.VertexProvider
 
 class AndroidIntegrationTest : StringSpec() {
     private val tempDir = TestDirectoryListener()
@@ -92,17 +92,9 @@ class AndroidIntegrationTest : StringSpec() {
                 .build()
 
             val reportFile = projectDir.resolve("build/reports/taskGraph/graph.dot")
-            val importer = DOTImporter<String, DefaultEdge>(
-                VertexProvider<String> { _, attributes -> attributes["label"].toString() },
-                EdgeProvider<String, DefaultEdge> { _, _, _, _ -> DefaultEdge() }
-            )
-            val reportedGraph = DirectedAcyclicGraph<String, DefaultEdge>(DefaultEdge::class.java)
-            importer.importGraph(reportedGraph, reportFile)
-
-            val expectedGraph = DirectedAcyclicGraph<String, DefaultEdge>(DefaultEdge::class.java)
-            importer.importGraph(expectedGraph, javaClass.getResource("/android-agp-3.5.2.dot").openStream())
-
-            VF2GraphIsomorphismInspector(reportedGraph, expectedGraph).isomorphismExists() shouldBe true
+            val actualGraph = loadGraphFromFile(reportFile)
+            val expectedGraph = loadGraphFromTestResources("/android-agp-3.5.2.dot")
+            actualGraph shouldBeIsomorphTo expectedGraph
         }
 
         "Works if report file already exists" {

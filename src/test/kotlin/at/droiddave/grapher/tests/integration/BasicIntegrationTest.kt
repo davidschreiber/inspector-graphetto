@@ -1,6 +1,6 @@
 package at.droiddave.grapher.tests.integration
 
-import at.droiddave.grapher.tests.utils.TestDirectoryListener
+import at.droiddave.grapher.tests.utils.*
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
@@ -45,16 +45,17 @@ class BasicIntegrationTest : StringSpec() {
                 .withArguments("someTask")
                 .build()
 
-            val reportFile = projectDir.resolve("build/reports/taskGraph/graph.dot")
-            val reportContent = reportFile.readText()
-            reportContent shouldBe """
-                strict digraph G {
-                  1 [ label=":someOtherTask" ];
-                  2 [ label=":someTask" ];
-                  2 -> 1;
-                }
-                
-            """.trimIndent()
+            val graphReportFile = projectDir.resolve("build/reports/taskGraph/graph.dot")
+            val actualGraph = loadGraphFromFile(graphReportFile)
+            val expectedGraph = loadGraphFromString("""
+                    strict digraph G {
+                      1 [ label=":someOtherTask" ];
+                      2 [ label=":someTask" ];
+                      2 -> 1;
+                    }
+                    """.trimIndent()
+            )
+            actualGraph shouldBeIsomorphTo expectedGraph
         }
 
         "Works if report file already exists" {
