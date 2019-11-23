@@ -9,6 +9,7 @@ import org.jgrapht.io.DOTImporter
 import org.jgrapht.io.EdgeProvider
 import org.jgrapht.io.VertexProvider
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
 
 /** Shared importer instance for loading a DAG from a .dot file. */
@@ -26,7 +27,10 @@ fun loadGraphFromFile(file: File) = loadGraphFromStream(file.inputStream())
  */
 fun loadGraphFromString(dotFileContent: String) = loadGraphFromStream(dotFileContent.byteInputStream())
 
-fun loadGraphFromTestResources(resourcePath: String) = loadGraphFromStream(dotFileImporter.javaClass.getResourceAsStream(resourcePath))
+fun loadGraphFromTestResources(resourcePath: String) = loadGraphFromStream(
+    dotFileImporter.javaClass.getResourceAsStream(resourcePath)
+        ?: throw IOException("No such test resource: $resourcePath")
+)
 
 /**
  * Imports a directed acyclic graph from the given input stream.

@@ -11,11 +11,18 @@ class TestDirectoryListener : TestListener {
     fun get(): File = testDirectory
 
     override fun beforeTest(testCase: TestCase) {
-        testDirectory.delete()
+        testDirectory.deleteRecursively()
         testDirectory.mkdir()
     }
 
     override fun afterTest(testCase: TestCase, result: TestResult) {
         testDirectory.deleteRecursively()
+    }
+
+    fun initializeWithResourceDirectory(resourceDirectoryPath: String): File {
+        val file = File(javaClass.getResource(resourceDirectoryPath).toURI())
+        if (!file.isDirectory) error("Not a directory: ${file.absolutePath}")
+        file.copyRecursively(testDirectory, overwrite = true)
+        return testDirectory
     }
 }
