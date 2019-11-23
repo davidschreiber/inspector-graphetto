@@ -25,4 +25,27 @@ plugins {
 
 Simply run a build, and Graphene will write a GraphViz `.dot` file to `build/reports/taskGraph/graph.dot`.
 
+```shell
+gradle assembleDebug
+ls -l build/reports/taskGraph/graph.dot
+```
 
+## Configuration
+
+The plugin registers an extension called `graphene` on your project which can be used to configure the output:
+
+```groovy
+graphene {
+    outputFile = new File(buildDir, 'reports/my-task-graph.dot')
+}
+```
+
+### `outputFile`
+
+Configures the path of the `.dot` output file containing the information about the task graph that was executed.  
+
+```groovy
+graphene {
+    outputFile = new File(buildDir, 'reports/my-task-graph.dot')
+}
+```
