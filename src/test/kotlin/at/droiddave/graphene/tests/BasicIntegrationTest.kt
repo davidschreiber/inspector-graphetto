@@ -1,4 +1,4 @@
-package at.droiddave.graphene.tests.integration
+package at.droiddave.graphene.tests
 
 import at.droiddave.graphene.tests.utils.TestDirectoryListener
 import at.droiddave.graphene.tests.utils.loadGraphFromFile
