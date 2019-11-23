@@ -1,15 +1,11 @@
-package at.droiddave.grapher.tests.integration
+package at.droiddave.graphene.tests.integration
 
-import at.droiddave.grapher.tests.utils.TestDirectoryListener
-import at.droiddave.grapher.tests.utils.loadGraphFromFile
-import at.droiddave.grapher.tests.utils.loadGraphFromTestResources
-import at.droiddave.grapher.tests.utils.shouldBeIsomorphTo
-import io.kotlintest.shouldBe
+import at.droiddave.graphene.tests.utils.TestDirectoryListener
+import at.droiddave.graphene.tests.utils.loadGraphFromFile
+import at.droiddave.graphene.tests.utils.loadGraphFromTestResources
+import at.droiddave.graphene.tests.utils.shouldBeIsomorphTo
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
-import org.jgrapht.alg.isomorphism.VF2GraphIsomorphismInspector
-import org.jgrapht.graph.DefaultEdge
-import org.jgrapht.graph.DirectedAcyclicGraph
 
 class AndroidIntegrationTest : StringSpec() {
     private val tempDir = TestDirectoryListener()
@@ -30,7 +26,7 @@ class AndroidIntegrationTest : StringSpec() {
                     }
                 }
                 plugins {
-                    id("at.droiddave.grapher")
+                    id("at.droiddave.graphene")
                 }
                 apply plugin: 'com.android.application'
 
@@ -52,7 +48,7 @@ class AndroidIntegrationTest : StringSpec() {
                 parentFile.mkdirs()
                 writeText("""
                     <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-                        package="at.droiddave.grapher.testapp"
+                        package="at.droiddave.graphene.testapp"
                         xmlns:tools="http://schemas.android.com/tools"/>
                 """.trimIndent())
             }
@@ -68,7 +64,7 @@ class AndroidIntegrationTest : StringSpec() {
                     }
                 }
                 plugins {
-                    id('at.droiddave.grapher')
+                    id('at.droiddave.graphene')
                 }
                 repositories {
                     google()
@@ -80,7 +76,7 @@ class AndroidIntegrationTest : StringSpec() {
                     compileSdkVersion 29
                     buildToolsVersion '29.0.0'
                     defaultConfig {
-                        applicationId 'at.droiddave.grapher.testapp'
+                        applicationId 'at.droiddave.graphene.testapp'
                     }
                 }
             """.trimIndent())

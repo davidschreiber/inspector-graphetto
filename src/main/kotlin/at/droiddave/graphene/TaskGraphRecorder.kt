@@ -1,4 +1,4 @@
-package at.droiddave.grapher
+package at.droiddave.graphene
 
 class TaskGraphRecorder {
     val executedTasks: List<TaskInfo> get() = recordedTasks

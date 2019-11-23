@@ -1,17 +1,17 @@
-package at.droiddave.grapher.tests
+package at.droiddave.graphene.tests
 
-import at.droiddave.grapher.GrapherPlugin
+import at.droiddave.graphene.GraphenePlugin
 import io.kotlintest.specs.StringSpec
 import io.mockk.mockk
 import org.gradle.api.Project
 
-class GrapherUnitTest : StringSpec({
+class GrapheneUnitTest : StringSpec({
     "Plugin can be instantiated" {
-        GrapherPlugin()
+        GraphenePlugin()
     }
 
     "Plugin can be bound to project" {
-        val plugin = GrapherPlugin()
+        val plugin = GraphenePlugin()
         val project = mockk<Project>(relaxed = true)
         plugin.apply(project)
     }

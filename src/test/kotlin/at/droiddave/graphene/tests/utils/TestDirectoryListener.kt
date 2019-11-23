@@ -1,4 +1,4 @@
-package at.droiddave.grapher.tests.utils
+package at.droiddave.graphene.tests.utils
 
 import io.kotlintest.TestCase
 import io.kotlintest.TestResult

@@ -1,7 +1,9 @@
-package at.droiddave.grapher.tests.integration
+package at.droiddave.graphene.tests.integration
 
-import at.droiddave.grapher.tests.utils.*
-import io.kotlintest.shouldBe
+import at.droiddave.graphene.tests.utils.TestDirectoryListener
+import at.droiddave.graphene.tests.utils.loadGraphFromFile
+import at.droiddave.graphene.tests.utils.loadGraphFromString
+import at.droiddave.graphene.tests.utils.shouldBeIsomorphTo
 import io.kotlintest.specs.StringSpec
 import org.gradle.testkit.runner.GradleRunner
 
@@ -14,7 +16,7 @@ class BasicIntegrationTest : StringSpec() {
             val buildFile = tempDir.get().resolve("build.gradle")
             buildFile.writeText("""
                 plugins {
-                    id("at.droiddave.grapher")
+                    id("at.droiddave.graphene")
                 }
             """.trimIndent())
 
@@ -29,7 +31,7 @@ class BasicIntegrationTest : StringSpec() {
             val buildFile = projectDir.resolve("build.gradle")
             buildFile.writeText("""
                 plugins {
-                    id('at.droiddave.grapher')
+                    id('at.droiddave.graphene')
                 }
                 
                 tasks.register('someTask') {

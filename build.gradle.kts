@@ -8,7 +8,7 @@ plugins {
     id("java-gradle-plugin")
 }
 
-group = "at.droiddave.grapher"
+group = "at.droiddave.graphene"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -37,9 +37,9 @@ tasks.withType<Test> {
 
 gradlePlugin {
     plugins {
-        create("grapher") {
-            id = "at.droiddave.grapher"
-            implementationClass = "at.droiddave.grapher.GrapherPlugin"
+        create("graphene") {
+            id = "at.droiddave.graphene"
+            implementationClass = "at.droiddave.graphene.GraphenePlugin"
         }
     }
 }

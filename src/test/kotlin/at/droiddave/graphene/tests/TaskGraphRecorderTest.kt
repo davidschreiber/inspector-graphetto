@@ -1,7 +1,7 @@
-package at.droiddave.grapher.tests
+package at.droiddave.graphene.tests
 
-import at.droiddave.grapher.TaskGraphRecorder
-import at.droiddave.grapher.TaskInfo
+import at.droiddave.graphene.TaskGraphRecorder
+import at.droiddave.graphene.TaskInfo
 import io.kotlintest.matchers.beEmpty
 import io.kotlintest.matchers.collections.containExactly
 import io.kotlintest.should

@@ -1,4 +1,4 @@
-package at.droiddave.grapher
+package at.droiddave.graphene
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -8,7 +8,7 @@ import org.jgrapht.io.DOTExporter
 import org.jgrapht.io.IntegerComponentNameProvider
 import org.jgrapht.io.StringComponentNameProvider
 
-class GrapherPlugin : Plugin<Project> {
+class GraphenePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         val outputFile = target.buildDir.resolve("reports/taskGraph/graph.dot")
         outputFile.apply {

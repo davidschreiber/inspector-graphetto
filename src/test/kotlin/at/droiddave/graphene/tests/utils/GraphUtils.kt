@@ -1,4 +1,4 @@
-package at.droiddave.grapher.tests.utils
+package at.droiddave.graphene.tests.utils
 
 import io.kotlintest.shouldBe
 import org.jgrapht.Graph
