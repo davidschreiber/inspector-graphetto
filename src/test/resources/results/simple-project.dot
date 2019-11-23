@@ -1,0 +1,5 @@
+strict digraph G {
+  1 [ label=":someOtherTask" ];
+  2 [ label=":someTask" ];
+  2 -> 1;
+}

@@ -1,0 +1,9 @@
+plugins {
+    id('at.droiddave.graphene')
+}
+
+tasks.register('someTask') {
+    dependsOn 'someOtherTask'
+}
+
+tasks.register('someOtherTask')

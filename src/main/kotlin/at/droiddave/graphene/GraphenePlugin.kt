@@ -10,7 +10,7 @@ import org.jgrapht.io.IntegerComponentNameProvider
 import org.jgrapht.io.StringComponentNameProvider
 
 open class GrapheneExtension(project: Project) {
-    val outputFileProvider = project.objects.fileProperty().apply {
+    val outputFile = project.objects.fileProperty().apply {
         set(project.buildDir.resolve("reports/taskGraph/graph.dot"))
     }
 }
@@ -26,7 +26,7 @@ class GraphenePlugin : Plugin<Project> {
     }
 
     private fun createTaskGraphReport(taskGraph: TaskExecutionGraph) {
-        val outputFile = extension.outputFileProvider.get().asFile.apply {
+        val outputFile = extension.outputFile.get().asFile.apply {
             if (!parentFile.exists() && !parentFile.mkdirs()) {
                 error("Error while creating output directory: ${parentFile.absolutePath}")
             }
