@@ -24,7 +24,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("org.jgrapht:jgrapht-core:1.3.0")
     implementation("org.jgrapht:jgrapht-io:1.3.0")
-
+    implementation("io.bretty:console-tree-builder:2.0")
+    
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
     testImplementation(gradleTestKit())

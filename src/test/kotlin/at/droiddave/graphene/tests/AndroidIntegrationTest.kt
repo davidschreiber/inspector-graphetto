@@ -22,7 +22,7 @@ class AndroidIntegrationTest : StringSpec() {
 
         "Report task graph for :assembleDebug" {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/android-agp-3.5.2")
-            GradleRunner.create()
+            val buildResult = GradleRunner.create()
                 .withPluginClasspath()
                 .withProjectDir(projectDir)
                 .withArguments("assembleDebug")
