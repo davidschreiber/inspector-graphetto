@@ -1,11 +1,7 @@
 package at.droiddave.graphene.tests
 
-import at.droiddave.graphene.tests.utils.TestDirectoryListener
-import at.droiddave.graphene.tests.utils.loadGraphFromFile
-import at.droiddave.graphene.tests.utils.loadGraphFromTestResources
-import at.droiddave.graphene.tests.utils.shouldBeIsomorphTo
+import at.droiddave.graphene.tests.utils.*
 import io.kotlintest.specs.StringSpec
-import org.gradle.testkit.runner.GradleRunner
 
 class BasicIntegrationTest : StringSpec() {
     private val directoryRule = TestDirectoryListener()
@@ -13,25 +9,22 @@ class BasicIntegrationTest : StringSpec() {
 
     init {
         "Test plugin instantiation using plugin ID" {
-            val buildFile = directoryRule.get().resolve("build.gradle")
+            val projectDir = directoryRule.get()
+            val buildFile = projectDir.resolve("build.gradle")
             buildFile.writeText("""
                 plugins {
                     id("at.droiddave.graphene")
                 }
             """.trimIndent())
 
-            GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(directoryRule.get())
+            gradleRunner(projectDir)
                 .build()
         }
 
         "Logs default task" {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
 
-            GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(projectDir)
+            gradleRunner(projectDir)
                 .withArguments("someTask")
                 .build()
 
@@ -49,9 +42,7 @@ class BasicIntegrationTest : StringSpec() {
                 }
             """.trimIndent())
 
-            GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(projectDir)
+            gradleRunner(projectDir)
                 .withArguments("someTask")
                 .build()
 

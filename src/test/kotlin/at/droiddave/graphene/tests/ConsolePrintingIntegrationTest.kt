@@ -1,10 +1,10 @@
 package at.droiddave.graphene.tests
 
 import at.droiddave.graphene.tests.utils.TestDirectoryListener
+import at.droiddave.graphene.tests.utils.gradleRunner
 import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.string.shouldNotContain
 import io.kotlintest.specs.StringSpec
-import org.gradle.testkit.runner.GradleRunner
 
 class ConsolePrintingIntegrationTest : StringSpec() {
     private val directoryRule = TestDirectoryListener()
@@ -19,9 +19,7 @@ class ConsolePrintingIntegrationTest : StringSpec() {
                 }
             """.trimIndent())
 
-            val buildResult = GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(projectDir)
+            val buildResult = gradleRunner(projectDir)
                 .withArguments("someTask")
                 .build()
 
@@ -34,9 +32,7 @@ class ConsolePrintingIntegrationTest : StringSpec() {
         "Defaults to no console tree printing" {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
 
-            val buildResult = GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(projectDir)
+            val buildResult = gradleRunner(projectDir)
                 .withArguments("someTask")
                 .build()
 
