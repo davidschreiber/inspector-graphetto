@@ -41,6 +41,19 @@ class ConsolePrintingIntegrationTest : StringSpec() {
                     └── :someOtherTask
             """.trimIndent()
         }
+
+        "Use system option to enable tree printing" {
+            val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
+
+            val buildResult = gradleRunner(projectDir)
+                .withArguments("someTask", "-Dat.droiddave.graphene.consoleOutput=TREE")
+                .build()
+
+            buildResult.output shouldContain """
+                ── :someTask
+                    └── :someOtherTask
+            """.trimIndent()
+        }
     }
 
 }

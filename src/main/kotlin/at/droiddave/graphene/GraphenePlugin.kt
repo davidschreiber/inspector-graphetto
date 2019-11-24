@@ -31,7 +31,13 @@ class GraphenePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         extension = target.extensions.create("graphene", GrapheneExtension::class.java, target)
         target.gradle.taskGraph.addTaskExecutionGraphListener { taskGraph ->
-            if (extension.consoleOutput.get() == ConsoleOutput.TREE) {
+            val consoleOutput = target
+                .gradle
+                .startParameter
+                .systemPropertiesArgs["at.droiddave.graphene.consoleOutput"]
+                ?.let { ConsoleOutput.valueOf(it) }
+                ?: extension.consoleOutput.get()
+            if (consoleOutput == ConsoleOutput.TREE) {
                 printTaskTreeToConsole(target)
             }
 
