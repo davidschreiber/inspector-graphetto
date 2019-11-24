@@ -84,3 +84,5 @@ graphene {
     consoleOutput = at.droiddave.graphene.ConsoleOutput.TREE
 }
 ```
+
+You can also override the current configuration by passing the `-Dat.droiddave.graphene.consoleOutput=TREE` option when invoking your build on the command line.
