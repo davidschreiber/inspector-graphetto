@@ -26,6 +26,7 @@ dependencies {
     implementation("org.jgrapht:jgrapht-core:1.3.0")
     implementation("org.jgrapht:jgrapht-io:1.3.0")
     implementation("io.bretty:console-tree-builder:2.0")
+    implementation("guru.nidi:graphviz-java:0.12.1")
     
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")

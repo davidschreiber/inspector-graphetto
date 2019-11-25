@@ -71,5 +71,6 @@ class GraphettoPlugin : Plugin<Project> {
             null
         )
         exporter.exportGraph(dag, outputFile)
+//        GraphVizRenderer().render(outputFile, outputFile.parentFile.resolve("graph.png"), OutputFormat.PNG)
     }
 }
