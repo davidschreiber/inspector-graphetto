@@ -36,6 +36,8 @@ strict digraph G {
 }
 ```
 
+### Console Printing
+
 To print the entire task dependency graph to the console, use the `-Dat.droiddave.graphetto.consoleOutput=TREE` option:
 
 ```shell 
@@ -49,6 +51,8 @@ $ ./gradlew someTask -Dat.droiddave.graphetto.consoleOutput=TREE
 
 BUILD SUCCESSFUL in 92ms
 ```
+
+### Image Rendering
 
 Inspector Graphettto can also render PNG or PDF files of the task using GraphViz. To do so, you can set the `-Dat.droiddave.graphetto.outputFormat` property to either `PNG` or `PDF`:
 
