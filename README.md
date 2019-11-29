@@ -26,7 +26,7 @@ plugins {
 Simply run a build, and Inspector Graphetto will write a GraphViz `.dot` file to `build/reports/taskGraph/graph.dot`.
 
 ```shell
-$ ./gradlew assembleDebug
+$ ./gradlew assembleDebug -Dat.droiddave.graphene.enabled=true
 $ cat build/reports/taskGraph/graph.dot
 
 strict digraph G {
@@ -57,11 +57,36 @@ The plugin registers an extension called `graphetto` on your project which can b
 
 ```groovy
 graphetto {
-    dotFile = new File(buildDir, 'reports/my-task-graph.dot')
+    enabled = true
+    dotFile = "$buildDir/reports/taskGraph/graph.dot"
+    renderFormat = RenderFormat.PNG
+    outputFile = "$buildDir/reports/taskGraph/graph.png"
     consoleOutput = at.droiddave.graphetto.ConsoleOutput.TREE
 }
 ```
 
+### `enabled`
+
+*Default:* `false`  
+*Command line option:* `at.droiddave.graphene.enabled=[true|false]`
+
+Enables task graph report generation. This is disabled by default to not affect build times, and should only be enabled on demand (i.e. if a task graph report should be generated).
+
+When running a build from the command line, you can enable report generation using the `-Dat.droiddave.graphene.enabled=true` option:
+
+```shell 
+./gradlew assembleDebug -Dat.droiddave.graphene.enabled=true
+```
+
+Alternatively, to enable report generation inside your Gradle build file, simply set the `graphene.enabled` DSL property to `true`:
+
+```groovy
+graphene {
+    enabled = true
+}
+```
+
+Note that the command line option takes precedence over the value configured via the DSL, and can therefore be used to override the default.
 ### `dotFile`
 
 Configures the path of the `.dot` output file containing the information about the task graph that was executed. Defaults to `reports/taskGraph/graph.dot`.  
