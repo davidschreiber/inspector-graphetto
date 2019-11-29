@@ -27,6 +27,7 @@ class TestDirectoryListener : TestListener {
     override fun afterTest(testCase: TestCase, result: TestResult) {
         getTestDirectory().apply {
             deleteRecursively()
+            println(getTestDirectory().absolutePath)
         }
         testDirectory = null
     }

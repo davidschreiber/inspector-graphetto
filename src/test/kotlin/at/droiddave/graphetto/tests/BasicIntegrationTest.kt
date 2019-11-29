@@ -38,7 +38,7 @@ class BasicIntegrationTest : StringSpec() {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
             projectDir.resolve("build.gradle").appendText("""
                 graphetto {
-                    outputFile = new File("${'$'}buildDir/report.dot")
+                    dotFile = new File("${'$'}buildDir/report.dot")
                 }
             """.trimIndent())
 
@@ -52,5 +52,4 @@ class BasicIntegrationTest : StringSpec() {
             actualGraph shouldBeIsomorphTo expectedGraph
         }
     }
-
 }

@@ -16,7 +16,7 @@ enum class ConsoleOutput {
 }
 
 open class GraphettoExtension(project: Project) {
-    val outputFile = project.objects.fileProperty().apply {
+    val dotFile = project.objects.fileProperty().apply {
         set(project.buildDir.resolve("reports/taskGraph/graph.dot"))
     }
 
@@ -51,7 +51,7 @@ class GraphettoPlugin : Plugin<Project> {
     }
 
     private fun createTaskGraphReport(taskGraph: TaskExecutionGraph) {
-        val outputFile = extension.outputFile.get().asFile.apply {
+        val outputFile = extension.dotFile.get().asFile.apply {
             if (!parentFile.exists() && !parentFile.mkdirs()) {
                 error("Error while creating output directory: ${parentFile.absolutePath}")
             }

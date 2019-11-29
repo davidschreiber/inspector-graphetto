@@ -57,18 +57,18 @@ The plugin registers an extension called `graphetto` on your project which can b
 
 ```groovy
 graphetto {
-    outputFile = new File(buildDir, 'reports/my-task-graph.dot')
+    dotFile = new File(buildDir, 'reports/my-task-graph.dot')
     consoleOutput = at.droiddave.graphetto.ConsoleOutput.TREE
 }
 ```
 
-### `outputFile`
+### `dotFile`
 
 Configures the path of the `.dot` output file containing the information about the task graph that was executed. Defaults to `reports/taskGraph/graph.dot`.  
 
 ```groovy
 graphetto {
-    outputFile = new File(buildDir, 'reports/my-task-graph.dot')
+    dotFile = new File(buildDir, 'reports/my-task-graph.dot')
 }
 ```
 
