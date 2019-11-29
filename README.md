@@ -13,7 +13,7 @@ plugins {
 }
 ```
 
-**In a `build.gradle.kts` Kotlin DSL file:**
+**In a `build.gradle.kts` file (Kotlin DSL):**
 
 ```kotlin 
 plugins {
@@ -23,11 +23,11 @@ plugins {
 
 ## Usage
 
-Simply run a build, and Inspector Graphetto will write a GraphViz `.dot` file to `build/reports/taskGraph/graph.dot`.
+Simply run a build for any task using the `-Dat.droiddave.graphetto.enabled=true` option, and Inspector Graphetto will write a GraphViz `.dot` file to `build/reports/graphetto/graph.dot`.
 
 ```shell
-$ ./gradlew assembleDebug -Dat.droiddave.graphene.enabled=true
-$ cat build/reports/taskGraph/graph.dot
+$ ./gradlew someTask -Dat.droiddave.graphetto.enabled=true
+$ cat build/reports/graphetto/graph.dot
 
 strict digraph G {
   1 [ label=":someOtherTask" ];
@@ -36,10 +36,10 @@ strict digraph G {
 }
 ```
 
-You can also print the entire task dependency graph to the console:
+To print the entire task dependency graph to the console, use the `-Dat.droiddave.graphetto.consoleOutput=TREE` option:
 
 ```shell 
-$ ./gradlew assembleDebug -Dat.droiddave.graphetto.consoleOutput=TREE
+$ ./gradlew someTask -Dat.droiddave.graphetto.consoleOutput=TREE
 
  ── :someTask
     └── :someOtherTask
@@ -48,8 +48,17 @@ $ ./gradlew assembleDebug -Dat.droiddave.graphetto.consoleOutput=TREE
 > Task :someTask UP-TO-DATE
 
 BUILD SUCCESSFUL in 92ms
-
 ```
+
+Inspector Graphettto can also render PNG or PDF files of the task using GraphViz. To do so, you can set the `-Dat.droiddave.graphetto.outputFormat` property to either `PNG` or `PDF`:
+
+```shell 
+$ ./gradlew someTask -Dat.droiddave.graphetto.outputFormat=PNG
+```
+
+This will render a PNG file to `build/reports/graphetto/graph.png`:
+
+![Graphetto Task Graph](readme-graph.png)
 
 ## Configuration
 
@@ -58,9 +67,9 @@ The plugin registers an extension called `graphetto` on your project which can b
 ```groovy
 graphetto {
     enabled = true
-    dotFile = "$buildDir/reports/taskGraph/graph.dot"
+    dotFile = "$buildDir/reports/graphetto/graph.dot"
     renderFormat = RenderFormat.PNG
-    outputFile = "$buildDir/reports/taskGraph/graph.png"
+    outputFile = "$buildDir/reports/graphetto/graph.png"
     consoleOutput = at.droiddave.graphetto.ConsoleOutput.TREE
 }
 ```
@@ -68,25 +77,26 @@ graphetto {
 ### `enabled`
 
 *Default:* `false`  
-*Command line option:* `at.droiddave.graphene.enabled=[true|false]`
+*Command line option:* `at.droiddave.graphetto.enabled=[true|false]`
 
 Enables task graph report generation. This is disabled by default to not affect build times, and should only be enabled on demand (i.e. if a task graph report should be generated).
 
-When running a build from the command line, you can enable report generation using the `-Dat.droiddave.graphene.enabled=true` option:
+When running a build from the command line, you can enable report generation using the `-Dat.droiddave.graphetto.enabled=true` option:
 
 ```shell 
-./gradlew assembleDebug -Dat.droiddave.graphene.enabled=true
+./gradlew assembleDebug -Dat.droiddave.graphetto.enabled=true
 ```
 
-Alternatively, to enable report generation inside your Gradle build file, simply set the `graphene.enabled` DSL property to `true`:
+Alternatively, to enable report generation inside your Gradle build file, simply set the `graphetto.enabled` DSL property to `true`:
 
 ```groovy
-graphene {
+graphetto {
     enabled = true
 }
 ```
 
 Note that the command line option takes precedence over the value configured via the DSL, and can therefore be used to override the default.
+
 ### `dotFile`
 
 Configures the path of the `.dot` output file containing the information about the task graph that was executed. Defaults to `reports/taskGraph/graph.dot`.  
