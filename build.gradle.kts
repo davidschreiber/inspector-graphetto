@@ -8,7 +8,7 @@ plugins {
     id("java-gradle-plugin")
 }
 
-group = "at.droiddave.graphene"
+group = "at.droiddave.graphetto"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -34,13 +34,15 @@ dependencies {
 tasks.withType<Test> {
     @Suppress("UnstableApiUsage")
     useJUnitPlatform()
+    // Since Graphetto outputs UTF-8 characters on the conosle, make sure tests run with UTF-8 encoding.
+    jvmArgs("-Dfile.encoding=utf-8")
 }
 
 gradlePlugin {
     plugins {
-        create("graphene") {
-            id = "at.droiddave.graphene"
-            implementationClass = "at.droiddave.graphene.GraphenePlugin"
+        create("graphetto") {
+            id = "at.droiddave.graphetto"
+            implementationClass = "at.droiddave.graphetto.GraphettoPlugin"
         }
     }
 }

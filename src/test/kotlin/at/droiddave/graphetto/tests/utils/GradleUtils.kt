@@ -1,4 +1,4 @@
-package at.droiddave.graphene.tests.utils
+package at.droiddave.graphetto.tests.utils
 
 import org.gradle.testkit.runner.GradleRunner
 import java.io.File

@@ -1,7 +1,7 @@
-package at.droiddave.graphene.tests
+package at.droiddave.graphetto.tests
 
-import at.droiddave.graphene.tests.utils.TestDirectoryListener
-import at.droiddave.graphene.tests.utils.gradleRunner
+import at.droiddave.graphetto.tests.utils.TestDirectoryListener
+import at.droiddave.graphetto.tests.utils.gradleRunner
 import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.matchers.string.shouldNotContain
 import io.kotlintest.specs.StringSpec
@@ -14,8 +14,8 @@ class ConsolePrintingIntegrationTest : StringSpec() {
         "Console tree printing" {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
             projectDir.resolve("build.gradle").appendText("""
-                graphene {
-                    consoleOutput = at.droiddave.graphene.ConsoleOutput.TREE
+                graphetto {
+                    consoleOutput = at.droiddave.graphetto.ConsoleOutput.TREE
                 }
             """.trimIndent())
 
@@ -46,7 +46,7 @@ class ConsolePrintingIntegrationTest : StringSpec() {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
 
             val buildResult = gradleRunner(projectDir)
-                .withArguments("someTask", "-Dat.droiddave.graphene.consoleOutput=TREE")
+                .withArguments("someTask", "-Dat.droiddave.graphetto.consoleOutput=TREE")
                 .build()
 
             buildResult.output shouldContain """

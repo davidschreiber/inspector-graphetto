@@ -1,5 +1,5 @@
 plugins {
-    id('at.droiddave.graphene')
+    id('at.droiddave.graphetto')
 }
 
 tasks.register('someTask') {

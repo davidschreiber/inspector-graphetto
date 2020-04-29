@@ -1,6 +1,6 @@
-package at.droiddave.graphene
+package at.droiddave.graphetto
 
-import at.droiddave.graphene.printer.ConsolePrinter
+import at.droiddave.graphetto.printer.ConsolePrinter
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.execution.TaskExecutionGraph
@@ -15,7 +15,7 @@ enum class ConsoleOutput {
     NONE
 }
 
-open class GrapheneExtension(project: Project) {
+open class GraphettoExtension(project: Project) {
     val outputFile = project.objects.fileProperty().apply {
         set(project.buildDir.resolve("reports/taskGraph/graph.dot"))
     }
@@ -25,16 +25,16 @@ open class GrapheneExtension(project: Project) {
     }
 }
 
-class GraphenePlugin : Plugin<Project> {
-    lateinit var extension: GrapheneExtension
+class GraphettoPlugin : Plugin<Project> {
+    lateinit var extension: GraphettoExtension
 
     override fun apply(target: Project) {
-        extension = target.extensions.create("graphene", GrapheneExtension::class.java, target)
+        extension = target.extensions.create("graphetto", GraphettoExtension::class.java, target)
         target.gradle.taskGraph.addTaskExecutionGraphListener { taskGraph ->
             val consoleOutput = target
                 .gradle
                 .startParameter
-                .systemPropertiesArgs["at.droiddave.graphene.consoleOutput"]
+                .systemPropertiesArgs["at.droiddave.graphetto.consoleOutput"]
                 ?.let { ConsoleOutput.valueOf(it) }
                 ?: extension.consoleOutput.get()
             if (consoleOutput == ConsoleOutput.TREE) {

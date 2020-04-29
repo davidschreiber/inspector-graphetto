@@ -1,4 +1,4 @@
-package at.droiddave.graphene.printer
+package at.droiddave.graphetto.printer
 
 import io.bretty.console.tree.TreeNodeConverter
 import io.bretty.console.tree.TreePrinter

@@ -9,7 +9,7 @@ buildscript {
     }
 }
 plugins {
-    id('at.droiddave.graphene')
+    id('at.droiddave.graphetto')
 }
 repositories {
     google()
@@ -21,6 +21,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion '29.0.0'
     defaultConfig {
-        applicationId 'at.droiddave.graphene.testapp'
+        applicationId 'at.droiddave.graphetto.testapp'
     }
 }

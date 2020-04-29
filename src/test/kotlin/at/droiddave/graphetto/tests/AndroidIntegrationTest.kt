@@ -1,6 +1,6 @@
-package at.droiddave.graphene.tests
+package at.droiddave.graphetto.tests
 
-import at.droiddave.graphene.tests.utils.*
+import at.droiddave.graphetto.tests.utils.*
 import io.kotlintest.specs.StringSpec
 
 class AndroidIntegrationTest : StringSpec() {

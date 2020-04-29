@@ -1,6 +1,6 @@
-package at.droiddave.graphene.tests
+package at.droiddave.graphetto.tests
 
-import at.droiddave.graphene.tests.utils.*
+import at.droiddave.graphetto.tests.utils.*
 import io.kotlintest.specs.StringSpec
 
 class BasicIntegrationTest : StringSpec() {
@@ -13,7 +13,7 @@ class BasicIntegrationTest : StringSpec() {
             val buildFile = projectDir.resolve("build.gradle")
             buildFile.writeText("""
                 plugins {
-                    id("at.droiddave.graphene")
+                    id("at.droiddave.graphetto")
                 }
             """.trimIndent())
 
@@ -37,7 +37,7 @@ class BasicIntegrationTest : StringSpec() {
         "Non default report file path" {
             val projectDir = directoryRule.initializeWithResourceDirectory("/fixtures/simple-project")
             projectDir.resolve("build.gradle").appendText("""
-                graphene {
+                graphetto {
                     outputFile = new File("${'$'}buildDir/report.dot")
                 }
             """.trimIndent())
