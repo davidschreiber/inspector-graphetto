@@ -9,7 +9,7 @@ Inside your top-level Gradle file add the Inspector Graphetto plugin:
 **In a `build.gradle` file (Groovy):**
 ```groovy
 plugins {
-    id 'at.droiddave.graphetto' version '1.0.0-SNAPSHOT'
+    id 'at.droiddave.graphetto' version '0.0.1'
 }
 ```
 
@@ -17,7 +17,7 @@ plugins {
 
 ```kotlin 
 plugins {
-    id("at.droiddave.graphetto") version "1.0.0-SNAPSHOT"
+    id("at.droiddave.graphetto") version "0.0.1"
 }
 ```
 

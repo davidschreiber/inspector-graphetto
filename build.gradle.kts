@@ -6,10 +6,11 @@ plugins {
     // the builds (not exact though): https://youtrack.jetbrains.com/issue/KT-34527
     kotlin("jvm") version "1.3.50"
     id("java-gradle-plugin")
+    id("com.gradle.plugin-publish") version "0.11.0"
 }
 
 group = "at.droiddave.graphetto"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -43,6 +44,19 @@ gradlePlugin {
         create("graphetto") {
             id = "at.droiddave.graphetto"
             implementationClass = "at.droiddave.graphetto.GraphettoPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/davidschreiber/graphetto"
+    vcsUrl = "https://github.com/davidschreiber/graphetto"
+    (plugins) {
+        "graphetto" {
+            displayName = "Inspector Graphetto"
+            description = "Inspector Graphetto is a Gradle build plugin to inspect and visualize the task execution " +
+                    "graph of your build."
+            tags = listOf("graphetto", "gradle-task", "task-graph", "tasks", "graph", "graphviz", "dot")
         }
     }
 }
