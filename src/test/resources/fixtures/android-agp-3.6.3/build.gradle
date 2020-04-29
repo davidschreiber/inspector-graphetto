@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.3'
+    }
+}
+plugins {
+    id('at.droiddave.graphetto')
+}
+repositories {
+    google()
+    jcenter()
+}
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.0'
+    defaultConfig {
+        applicationId 'at.droiddave.graphetto.testapp'
+    }
+}
