@@ -1,5 +1,11 @@
 # Inspector Graphetto
 
+<p>
+<a href="https://plugins.gradle.org/plugin/at.droiddave.graphetto/0.0.1-SNAPSHOT" alt="Gradle Plugin">
+    <img src="https://img.shields.io/badge/gradle%20plugin-0.0.1--SNAPSHOT-blue?logo=gradle" />
+</a>
+</p>
+
 _Inspector Graphetto_ is a Gradle build plugin to inspect and visualize the task execution graph of your build. 
 
 ## Installation
